@@ -1,0 +1,22 @@
+<div *ngIf="userData">
+	<h2>User Details:</h2>
+	<p>Fname: {{ userData?.firstName }}</p>
+	<p>Lname: {{ userData?.lastName }}</p>
+	<!-- Display other user details as needed -->
+</div>
+
+<div>
+	<input type="text" [(ngModel)]="searchQuery" placeholder="Enter search query">
+	<button (click)="search()">Search</button>
+  </div>
+  
+<div *ngIf="userSearch">
+	<h2>User Details:</h2>
+	<div *ngFor="let user of userSearch">
+	  <p>ID: {{ user.id }}</p>
+	  <p>First Name: {{ user.firstName }}</p>
+	  <p>Last Name: {{ user.lastName }}</p>
+	  <!-- Display other user details as needed -->
+	</div>
+</div>
+  

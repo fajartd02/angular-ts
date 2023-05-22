@@ -1,0 +1,74 @@
+<div *ngIf="isLogin">
+	<!-- Lanjut ngoding disni -->
+	<h1>Welcome, {{ username }}</h1>
+	<h1>NGODING DISNI RE LANJUT</h1> <br/>
+	
+	<form (ngSubmit)="createUser()">
+		<h1>CREATE</h1>
+		<div>
+		  <label for="firstName">First Name</label>
+		  <input type="text" id="firstName" [(ngModel)]="firstName" name="firstName" required>
+		</div>
+		<div>
+		  <label for="lastName">Last Name</label>
+		  <input type="text" id="lastName" [(ngModel)]="lastName" name="lastName" required>
+		</div>
+		<button type="submit">Create User</button>
+	</form>
+	  
+	<div *ngIf="showSuccess">
+		<p>User created successfully!</p>
+		<p>ID: {{ createdUser.id }}</p>
+		<p>First Name: {{ createdUser.firstName }}</p>
+		<p>Last Name: {{ createdUser.lastName }}</p>
+	</div>
+	<br/> <br/>
+	  
+	<div>
+		<h1>Search</h1>
+		<input type="text" [(ngModel)]="searchQuery" placeholder="Enter search query">
+		<button (click)="search()">Search</button>
+	</div>
+	
+	<p *ngIf="deletedUserId">User with ID {{ deletedUserId }} has been deleted.</p>
+	
+	<!-- Edit User Modal -->
+	<p *ngIf="updatedUserId">User with ID {{ updatedUserId }} has been updated.</p>
+	
+	<div *ngIf="editUser" class="modal">
+		<div class="modal-content">
+			<h2>Edit User</h2>
+			<div>
+				<label for="editFirstName">First Name</label>
+				<input type="text" id="editFirstName" [(ngModel)]="editUser.firstName" name="editFirstName" required>
+			</div>
+			<div>
+				<label for="editLastName">Last Name</label>
+				<input type="text" id="editLastName" [(ngModel)]="editUser.lastName" name="editLastName" required>
+			</div>
+			<div class="modal-actions">
+				<button (click)="saveUserChanges()">Save</button>
+				<button (click)="closeEditModal()">Cancel</button>
+			</div>
+		</div>
+	</div>
+	
+	<div *ngIf="userData">
+		<h2>User Details:</h2>
+		<div *ngFor="let user of userData">
+			<p>ID: {{ user.id }}</p>
+			<p>First Name: {{ user.firstName }}</p>
+			<p>Last Name: {{ user.lastName }}</p>
+			<!-- Display other user details as needed -->
+			<button (click)="deleteUser(user.id)">Delete</button>
+			<button (click)="openEditModal(user)">Edit</button>
+		</div>  
+	</div>	
+
+  </div>
+  
+<div *ngIf="!isLogin">
+	<p>Please log in to access the user management.</p>
+	<!-- Your login form or login button here -->
+</div>
+
